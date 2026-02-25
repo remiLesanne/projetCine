@@ -10,5 +10,5 @@ import {RouterOutlet} from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App   {
-  protected readonly title = signal('je suis trop fort');
+  protected readonly title = signal('PUNCH CINEMA');
 }
