@@ -9,102 +9,188 @@
               <h2 class="mb-1">Ajouter un Film</h2>
               <p class="text-muted mb-0">Renseigne les infos ci-dessous</p>
             </div>
-            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Mode anglais/fr, Mode sombre/clair</span>
+            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Movies</span>
           </div>
 
-          <!-- ✅ FORM -->
+          <!-- Messages de feedback -->
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+          </div>
+
+          <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ successMessage }}
+            <button type="button" class="btn-close" (click)="successMessage = ''" aria-label="Close"></button>
+          </div>
+
           <form #f="ngForm" (ngSubmit)="addMovie()" novalidate>
 
-            <!-- ✅ TITLE: MAJUSCULES ONLY -->
-            <div class="form-floating mb-3">
-              <input type="text" id="title" name="title" class="form-control" placeholder="Titre"
-                [(ngModel)]="movie.title" required pattern="^[A-ZÀ-ÖØ-Ý0-9 '’-]+$" #title="ngModel"
-                style="text-transform: uppercase" />
-              <label for="title">Titre</label>
+            <!-- TITLE -->
+            <div class="form-floating mb-2">
+              <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                [class.is-invalid]="title.invalid && (title.dirty || title.touched)"
+                [class.is-valid]="title.valid && title.dirty"
+                placeholder="Titre"
+                [ngModel]="movie.title"
+                (ngModelChange)="movie.title = ($event ?? '').toUpperCase()"
+                required
+                pattern="^[A-ZÀ-ÖØ-Ý0-9 ''-]+$"
+                #title="ngModel"
+              />
+              <label for="title">Titre *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="title.invalid && (title.dirty || title.touched)">
+              <div *ngIf="title.errors?.['required']">Le titre est obligatoire.</div>
+              <div *ngIf="title.errors?.['pattern']">Majuscules uniquement (A-Z, accents, chiffres, espaces).</div>
+            </div>
 
-              <div class="text-danger small mt-1" *ngIf="title.invalid && (title.dirty || title.touched)">
-                <div *ngIf="title.errors?.['required']">Le titre est obligatoire.</div>
-                <div *ngIf="title.errors?.['pattern']">Majuscules uniquement.</div>
+            <!-- DIRECTOR -->
+            <div class="form-floating mb-2">
+              <input
+                type="text"
+                id="director"
+                name="director"
+                class="form-control"
+                [class.is-invalid]="director.invalid && (director.dirty || director.touched)"
+                [class.is-valid]="director.valid && director.dirty"
+                placeholder="Réalisateur"
+                [(ngModel)]="movie.director"
+                required
+                pattern="^[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ''-]+(?: [A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ''-]+)+$"
+                #director="ngModel"
+              />
+              <label for="director">Réalisateur *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="director.invalid && (director.dirty || director.touched)">
+              <div *ngIf="director.errors?.['required']">Le réalisateur est obligatoire.</div>
+              <div *ngIf="director.errors?.['pattern']">Format attendu : Nom Prénom (ex: Nolan Christopher).</div>
+            </div>
+
+            <!-- RELEASE DATE -->
+            <div class="form-floating mb-2">
+              <input
+                type="date"
+                id="releaseDate"
+                name="releaseDate"
+                class="form-control"
+                [class.is-invalid]="releaseDate.invalid && (releaseDate.dirty || releaseDate.touched)"
+                [class.is-valid]="releaseDate.valid && releaseDate.dirty"
+                placeholder="Date de sortie"
+                [(ngModel)]="movie.releaseDate"
+                required
+                [max]="today"
+                #releaseDate="ngModel"
+              />
+              <label for="releaseDate">Date de sortie *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="releaseDate.invalid && (releaseDate.dirty || releaseDate.touched)">
+              <div *ngIf="releaseDate.errors?.['required']">La date est obligatoire.</div>
+              <div *ngIf="releaseDate.errors?.['max']">La date doit être avant ou égale à aujourd'hui.</div>
+            </div>
+
+            <!-- SYNOPSIS -->
+            <div class="form-floating mb-2">
+              <textarea
+                id="synopsis"
+                name="synopsis"
+                class="form-control synopsis-textarea"
+                [class.is-invalid]="synopsis.invalid && (synopsis.dirty || synopsis.touched)"
+                [class.is-valid]="synopsis.valid && synopsis.dirty"
+                placeholder="Synopsis"
+                [(ngModel)]="movie.synopsis"
+                required
+                minlength="30"
+                #synopsis="ngModel"
+              ></textarea>
+              <label for="synopsis">Synopsis *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="synopsis.invalid && (synopsis.dirty || synopsis.touched)">
+              <div *ngIf="synopsis.errors?.['required']">Le synopsis est obligatoire.</div>
+              <div *ngIf="synopsis.errors?.['minlength']">
+                Minimum {{ synopsis.errors?.['minlength'].requiredLength }} caractères
+                (actuellement {{ synopsis.errors?.['minlength'].actualLength }}).
               </div>
             </div>
 
-            <!-- ✅ DIRECTOR: "Nom Prénom" regex -->
-            <div class="form-floating mb-3">
-              <input type="text" id="director" name="director" class="form-control" placeholder="Réalisateur"
-                [(ngModel)]="movie.director" required
-                pattern="^[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ'’-]+(?: [A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ'’-]+)+$" #director="ngModel" />
-              <label for="director">Réalisateur</label>
-
-              <div class="text-danger small mt-1" *ngIf="director.invalid && (director.dirty || director.touched)">
-                <div *ngIf="director.errors?.['required']">Le réalisateur est obligatoire.</div>
-                <div *ngIf="director.errors?.['pattern']">
-                  Format attendu : Nom Prénom (ex: Nolan Christopher).
-                </div>
-              </div>
+            <!-- RATE -->
+            <div class="form-floating mb-2">
+              <input
+                type="number"
+                id="rate"
+                name="rate"
+                class="form-control"
+                [class.is-invalid]="rate.invalid && (rate.dirty || rate.touched)"
+                [class.is-valid]="rate.valid && rate.dirty"
+                placeholder="Note"
+                [(ngModel)]="movie.rate"
+                required
+                min="0"
+                max="10"
+                step="0.1"
+                #rate="ngModel"
+              />
+              <label for="rate">Note (0–10) *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="rate.invalid && (rate.dirty || rate.touched)">
+              <div *ngIf="rate.errors?.['required']">La note est obligatoire.</div>
+              <div *ngIf="rate.errors?.['min']">Minimum 0.</div>
+              <div *ngIf="rate.errors?.['max']">Maximum 10.</div>
             </div>
 
-            <!-- ✅ RELEASE DATE: <= today -->
-            <div class="form-floating mb-3">
-              <input type="date" id="releaseDate" name="releaseDate" class="form-control" placeholder="Date de sortie"
-                [(ngModel)]="movie.releaseDate" required [max]="today" #releaseDate="ngModel" />
-              <label for="releaseDate">Date de sortie</label>
-
-              <div class="text-danger small mt-1"
-                *ngIf="releaseDate.invalid && (releaseDate.dirty || releaseDate.touched)">
-                <div *ngIf="releaseDate.errors?.['required']">La date est obligatoire.</div>
-                <div *ngIf="releaseDate.errors?.['max']">La date doit être avant aujourd’hui.</div>
-              </div>
+            <!-- IMAGE -->
+            <div class="form-floating mb-2">
+              <input
+                type="url"
+                id="image"
+                name="image"
+                class="form-control"
+                [class.is-invalid]="image.invalid && (image.dirty || image.touched)"
+                [class.is-valid]="image.valid && image.dirty"
+                placeholder="https://..."
+                [(ngModel)]="movie.image"
+                required
+                #image="ngModel"
+              />
+              <label for="image">URL de l'image *</label>
+            </div>
+            <div class="text-danger small mb-3" *ngIf="image.invalid && (image.dirty || image.touched)">
+              <div *ngIf="image.errors?.['required']">L'URL de l'image est obligatoire.</div>
+              <div *ngIf="image.errors?.['url']">L'URL doit être valide (ex: https://...)</div>
+            </div>
+            <!-- Aperçu de l'image -->
+            <div *ngIf="image.valid && movie.image" class="mb-4 text-center">
+              <img [src]="movie.image" alt="Aperçu" class="img-thumbnail preview-image" />
+              <p class="text-muted small mt-2">Aperçu de l'affiche</p>
             </div>
 
-            <!-- ✅ SYNOPSIS: minlength 30 -->
-            <div class="form-floating mb-3">
-              <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis" style="height: 120px"
-                [(ngModel)]="movie.synopsis" required minlength="30" #synopsis="ngModel"></textarea>
-              <label for="synopsis">Synopsis</label>
-
-              <div class="text-danger small mt-1" *ngIf="synopsis.invalid && (synopsis.dirty || synopsis.touched)">
-                <div *ngIf="synopsis.errors?.['required']">Le synopsis est obligatoire.</div>
-                <div *ngIf="synopsis.errors?.['minlength']">
-                  Minimum {{ synopsis.errors?.['minlength'].requiredLength }} caractères.
-                </div>
-              </div>
-            </div>
-
-            <!-- ✅ RATE: 0–10 -->
-            <div class="form-floating mb-3">
-              <input type="number" id="rate" name="rate" class="form-control" placeholder="Note"
-                [(ngModel)]="movie.rate" required min="0" max="10" #rate="ngModel" />
-              <label for="rate">Note (0–10)</label>
-
-              <div class="text-danger small mt-1" *ngIf="rate.invalid && (rate.dirty || rate.touched)">
-                <div *ngIf="rate.errors?.['required']">La note est obligatoire.</div>
-                <div *ngIf="rate.errors?.['min']">Minimum 0.</div>
-                <div *ngIf="rate.errors?.['max']">Maximum 10.</div>
-              </div>
-            </div>
-
-            <!-- ✅ IMAGE URL -->
-            <div class="form-floating mb-4">
-              <input type="url" id="image" name="image" class="form-control" placeholder="https://..."
-                [(ngModel)]="movie.image" required #image="ngModel" />
-              <label for="image">URL de l'image</label>
-
-              <div class="text-danger small mt-1" *ngIf="image.invalid && (image.dirty || image.touched)">
-                <div *ngIf="image.errors?.['required']">L’URL de l’image est obligatoire.</div>
-                <div *ngIf="image.errors?.['pattern']">URL invalide.</div>
-              </div>
-            </div>
-
-            <!-- ✅ SUBMIT -->
             <div class="d-grid">
-              <button type="submit" class="btn btn-warning btn-lg" [disabled]="f.invalid">
-                Ajouter le film
+              <button type="submit" class="btn btn-warning btn-lg" [disabled]="isSubmitting">
+
+                <span *ngIf="isSubmitting">
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Ajout en cours...
+                </span>
+                AJOUTE LE FILM !
               </button>
             </div>
+
+            <!-- Indicateur de validation -->
+            <div class="mt-3 text-center">
+              <small class="text-muted">
+                <span *ngIf="f.valid" class="text-success">Formulaire prêt</span>
+                <span *ngIf="f.invalid && !f.pristine" class="text-warning">Vérifie les champs ci-dessus</span>
+                <span *ngIf="f.pristine" class="text-muted">Remplis le formulaire</span>
+              </small>
+            </div>
+
           </form>
-          <!-- ✅ /FORM -->
         </div>
       </div>
+
     </div>
   </div>
 </div>
