@@ -5,6 +5,7 @@ import {Admin} from './admin/admin';
 import {AddMovie} from './add-movie/add-movie';
 import {EditMovie} from './edit-movie/edit-movie';
 import { Inscription } from './user/inscription/inscription';
+import { Connexion } from './user/connexion/connexion';
 
 export const routes: Routes = [
   { path: '', component: Home},
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'admin', component: Admin},
   { path: 'AddMovie', component: AddMovie},
   { path: 'edit-movie/:id', component: EditMovie},
-  { path: 'inscription', component: Inscription}
+  { path: 'inscription', component: Inscription},
+  { path: 'connexion', component: Connexion}
 ];
