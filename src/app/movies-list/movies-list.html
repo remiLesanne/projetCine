@@ -1,0 +1,72 @@
+<div class="container-fluid py-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0"><i class="bi bi-film me-2"></i>Gestion des Films</h3>
+      <button class="btn btn-success" routerLink="/AddMovie">
+        <i class="bi bi-plus-circle me-2"></i>Nouveau film
+      </button>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+          <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col">Titre</th>
+            <th scope="col" class="text-center">Date de sortie</th>
+            <th scope="col">Réalisateur</th>
+            <th scope="col" class="text-center">Note</th>
+            <th scope="col">Synopsis</th>
+            <th scope="col">Modifier</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (movie of movies(); track movie.id) {
+              <tr>
+                <td class="text-center align-middle">
+                  <span class="badge bg-secondary">{{ movie.id }}</span>
+                </td>
+                <td class="align-middle">
+                  <strong>{{ movie.title }}</strong>
+                </td>
+                <td class="text-center align-middle">
+                  <small class="text-muted">{{ movie.releaseDate | date: 'dd/MM/yyyy' }}</small>
+                </td>
+                <td class="align-middle">
+                  <i class="bi bi-person-circle me-1"></i>{{ movie.director }}
+                </td>
+                <td class="text-center align-middle">
+                  @if (movie.rate) {
+                    @if (movie.rate >= 8) {
+                      <span class="badge bg-success fs-6">⭐ {{ movie.rate }}/10</span>
+                    } @else if (movie.rate >= 5) {
+                      <span class="badge bg-warning text-dark fs-6">⭐ {{ movie.rate }}/10</span>
+                    } @else {
+                      <span class="badge bg-danger fs-6">⭐ {{ movie.rate }}/10</span>
+                    }
+                  } @else {
+                    <span class="badge bg-secondary">N/A</span>
+                  }
+                </td>
+                <td class="align-middle">
+                  <small>{{ movie.synopsis }}</small>
+                </td>
+                <td class="align-middle text-center">
+                  <button class="btn btn-sm btn-warning me-2" [routerLink]="['/edit-movie', movie.id]">
+                    <i class="bi bi-pencil me-1"></i>Modifier
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteMovie(movie.id!)">
+                    <i class="bi bi-trash me-1"></i>Supprimer
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <small>Total : {{moviesC()}} film(s)</small>
+    </div>
+  </div>
+</div>

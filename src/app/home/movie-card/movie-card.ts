@@ -1,0 +1,15 @@
+import {Component, input,} from '@angular/core';
+import {Movie} from '../../models/movie';
+
+@Component({
+  selector: 'app-movie-card',
+  imports: [],
+  templateUrl: './movie-card.html',
+  styleUrl: './movie-card.scss',
+})
+export class MovieCard {
+  //@Input({required:true}) movie!:Movie;
+  movie = input.required<Movie>();
+
+
+}

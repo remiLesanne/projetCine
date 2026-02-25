@@ -1,0 +1,106 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg">
+        <div class="card-header bg-warning text-dark">
+          <h3 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Modifier le film</h3>
+        </div>
+        <div class="card-body p-4">
+          <form>
+            <div class="mb-3">
+              <label for="title" class="form-label fw-bold">
+                <i class="bi bi-film me-2"></i>Titre du film
+              </label>
+              <input type="text"
+                     class="form-control"
+                     id="title"
+                     name="title"
+                     [(ngModel)]="movie.title"
+                     placeholder="Ex: Inception"
+                     required/>
+            </div>
+
+            <div class="mb-3">
+              <label for="director" class="form-label fw-bold">
+                <i class="bi bi-person-circle me-2"></i>Réalisateur
+              </label>
+              <input type="text"
+                     class="form-control"
+                     id="director"
+                     name="director"
+                     [(ngModel)]="movie.director"
+                     placeholder="Ex: Christopher Nolan"
+                     required/>
+            </div>
+
+            <div class="mb-3">
+              <label for="date" class="form-label fw-bold">
+                <i class="bi bi-calendar3 me-2"></i>Date de sortie
+              </label>
+              <input type="date"
+                     class="form-control"
+                     id="date"
+                     name="date"
+                     [(ngModel)]="formattedDate"
+                     (ngModelChange)="onDateChange($event)"
+                     required/>
+            </div>
+
+            <div class="mb-3">
+              <label for="rate" class="form-label fw-bold">
+                <i class="bi bi-star-fill me-2"></i>Note (sur 10)
+              </label>
+              <input type="number"
+                     class="form-control"
+                     id="rate"
+                     name="rate"
+                     [(ngModel)]="movie.rate"
+                     min="0"
+                     max="10"
+                     step="0.1"
+                     placeholder="Ex: 8.5"/>
+            </div>
+
+            <div class="mb-3">
+              <label for="synopsis" class="form-label fw-bold">
+                <i class="bi bi-card-text me-2"></i>Synopsis
+              </label>
+              <textarea class="form-control"
+                        id="synopsis"
+                        name="synopsis"
+                        [(ngModel)]="movie.synopsis"
+                        rows="4"
+                        placeholder="Décrivez l'histoire du film..."
+                        required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="image" class="form-label fw-bold">
+                <i class="bi bi-image me-2"></i>URL de l'image (optionnel)
+              </label>
+              <input type="url"
+                     class="form-control"
+                     id="image"
+                     name="image"
+                     [(ngModel)]="movie.image"
+                     placeholder="https://exemple.com/image.jpg"/>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button"
+                      class="btn btn-secondary px-4"
+                      routerLink="/movies">
+                <i class="bi bi-arrow-left me-2"></i>Annuler
+              </button>
+              <button type="submit"
+                      class="btn btn-warning px-4"
+                      (click)="updateMovie()">
+                <i class="bi bi-check-circle me-2"></i>Enregistrer les modifications
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
