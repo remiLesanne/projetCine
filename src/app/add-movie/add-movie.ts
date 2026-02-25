@@ -62,4 +62,10 @@ export class AddMovie {
       () => this.router.navigate(['/movies'])  // Redirection vers la liste des films
     );
   }
+
+  // Propriété today : contient la date actuelle au format ISO (YYYY-MM-DD)
+  // Utilisée pour limiter la date de sortie à aujourd'hui ou avant dans le formulaire
+  today: string = new Date().toISOString().split('T')[0];
+
+
 }
