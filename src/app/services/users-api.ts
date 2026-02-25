@@ -13,4 +13,8 @@ export class UsersApi {
   addUser(user: User): Observable<User> {
     return this.httpClient.post<User>(this.url, user);
   }
+
+  connexion(email: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.url}/byEmail/${email}`);
+  }
 }
