@@ -27,13 +27,14 @@ export class Connexion {
     }
 
     if (!this.password || this.password.length === 0) {
-      this.toast.info("Le mot de passe n'a pas été renseigné !", "Mot de passe");
+      this.toast.err("Le mot de passe n'a pas été renseigné !", "Mot de passe");
       return;
     }
 
     this.usersApi.connexion(this.emailUser).subscribe({
       next: (user) => {
         console.log(user);
+        this.toast.ok("Bienvenue sur votre espace " + user.firstName + " " + user.lastName, "Authentification")
         this.router.navigate(['/']);
       },
       error: () => {
