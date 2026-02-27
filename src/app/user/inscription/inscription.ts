@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { UsersApi } from '../../services/users-api';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-inscription',
@@ -14,6 +15,7 @@ export class Inscription {
 
   private readonly usersApi = inject(UsersApi);
   private readonly router = inject(Router);
+  private readonly toast = inject(ToastService);
 
   user = signal<User>({
     id: undefined,
@@ -25,6 +27,21 @@ export class Inscription {
   })
 
   addUser() : void {
-    this.usersApi.addUser(this.user()).subscribe(() => this.router.navigate(['/']));
+    const u = this.user();
+
+    if(!u.firstName || !u.age || !u.lastName || !u.email) {
+      this.toast.warn("Veuillez remplir les champs obligatoires", "Formulaire");
+      return;
+    }
+    this.usersApi.addUser(u).subscribe({
+      next: () => {
+        this.toast.ok("Inscription finalisé avec succès !", "Inscription")
+        this.router.navigate(['/'])
+      },
+      error: () => {
+        this.toast.err("Erreur lors de la création de l'utilisateur", "Erreur")
+      }
+    })
+      
   }
 }

@@ -2,7 +2,6 @@
 
 <div class="d-flex flex-column w-50 gap-3">
 
-  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
     <!-- Email -->
     <div class="d-flex flex-column">
@@ -14,8 +13,7 @@
         class="form-control"
         placeholder="prenom.nom@allocine.com"
         [(ngModel)]="emailUser"
-        #emailCtrl="ngModel"
-        required />
+        #emailCtrl="ngModel" />
     </div>
 
     <!-- Mot de passe -->
@@ -27,17 +25,15 @@
         name="password"
         class="form-control"
         [(ngModel)]="password"
-        #passwordCtrl="ngModel"
-        required />
+        #passwordCtrl="ngModel" />
     </div>
 
     <button
       type="submit"
-      class="btn btn-primary"
-      [disabled]="form.invalid">
+      (click)="connexion()"
+      class="btn btn-primary">
       Se connecter
     </button>
 
-  </form>
 
 </div>

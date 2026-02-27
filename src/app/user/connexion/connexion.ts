@@ -3,6 +3,8 @@ import { User } from '../../models/user';
 import { UsersApi } from '../../services/users-api';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ToastService } from '../../services/toast';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-connexion',
@@ -13,19 +15,31 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class Connexion {
   private readonly usersApi = inject(UsersApi);
   private readonly router = inject(Router);
+  private readonly toast = inject(ToastService);
 
   emailUser = '';
   password = '';
 
-  onSubmit(form: NgForm): void {
-    if (form.invalid) return;
+  connexion(): void {
+    if (!this.emailUser || !this.emailUser.includes('@')) {
+      this.toast.err("L'email est invalide !", "Erreur")
+      return;
+    }
 
-    this.usersApi.connexion(this.emailUser).subscribe(user => {
-      console.log(user);
-      if (user?.id) {
+    if (!this.password || this.password.length === 0) {
+      this.toast.info("Le mot de passe n'a pas été renseigné !", "Mot de passe");
+      return;
+    }
+
+    this.usersApi.connexion(this.emailUser).subscribe({
+      next: (user) => {
+        console.log(user);
         this.router.navigate(['/']);
+      },
+      error: () => {
+        this.toast.err("Erreur lors de la connexion", "Erreur");
       }
-    });
+    })
   }
 
 }
