@@ -1,9 +1,9 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Movie } from '../models/movie';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MoviesApi } from '../services/movies-api';
-import { JsonPipe } from '@angular/common';
 
 /**
  * Composant AddMovie
@@ -13,8 +13,7 @@ import { JsonPipe } from '@angular/common';
   selector: 'app-add-movie', // Sélecteur HTML pour utiliser ce composant
   imports: [
     FormsModule,   // Module nécessaire pour la liaison bidirectionnelle (ngModel) dans le formulaire
-    RouterLink,// Directive pour créer des liens de navigation
-    JsonPipe
+    CommonModule,  // Module nécessaire pour les directives structurelles (*ngIf, *ngFor, etc.)
   ],
   templateUrl: './add-movie.html',  // Template HTML associé
   styleUrl: './add-movie.scss',     // Styles CSS/SCSS associés
