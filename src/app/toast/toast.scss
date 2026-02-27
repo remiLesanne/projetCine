@@ -1,0 +1,23 @@
+:host ::ng-deep .toast-timer {
+  position: relative;
+  overflow: hidden;
+}
+
+:host ::ng-deep .toast-timer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: currentColor;
+  opacity: 0.35;
+
+  transform-origin: left;
+  animation: toast-countdown 3s linear forwards; /* 3 secondes fixes */
+}
+
+@keyframes toast-countdown {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
