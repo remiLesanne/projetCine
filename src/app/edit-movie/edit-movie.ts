@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ export class EditMovie implements OnInit {
   private readonly moviesApi = inject(MoviesApi);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   movieId: number = 0;
   movie: Movie = {
@@ -48,6 +49,7 @@ export class EditMovie implements OnInit {
           const date = new Date(movie.releaseDate);
           this.formattedDate = date.toISOString().split('T')[0];
         }
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Erreur lors du chargement du film:', error);
