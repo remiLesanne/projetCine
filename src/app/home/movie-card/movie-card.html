@@ -1,7 +1,20 @@
 <div class="card shadow m-4" style="width: 18rem; min-height: 55rem">
-  @if(movie().image) {
-    <img [src]="'http://localhost:8080/movies/' + movie().id + '/image'" class="card-img-top" alt="">
+  @if (movie(); as m) {
+    <!-- Vérification que l'objet film n'est pas nul, ensuite on le stocke dans la variable m (m pour movie)-->
+  @if (m.image) {
+    <!-- Vérification que l'image existe -->
+    <img
+      [src]="
+        m.image.startsWith('http')
+          ? m.image
+          : 'http://localhost:8080/movies/' + m.id + '/image'
+      "
+      class="card-img-top"
+      [alt]=""
+    />
+    <!-- Si l'image commence avec http alors c'est une image en ligne (https://img.png) sinon c'est une image en bdd (img3.png)-->
   }
+}
   <div class="card-body">
     <h5 class="card-title">{{movie().title}}</h5>
     <p class="card-text">{{movie().synopsis}}</p>
