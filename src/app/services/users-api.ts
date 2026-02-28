@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {User} from '../models/user';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +19,14 @@ export class UsersApi {
   }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.url}/users`);
+    return this.httpClient.get<User[]>(this.url);
   }
 
   getUserById(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.url}/users/${id}`);
+    return this.httpClient.get<User>(`${this.url}/${id}`);
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.url}/users/${id}`, user);
+    return this.httpClient.put<User>(`${this.url}/${id}`, user);
   }
 }

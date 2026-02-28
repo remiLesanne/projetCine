@@ -18,7 +18,7 @@ export class AccountUser implements OnInit {
     lastName: '',
     age: undefined,
     email: '',
-    points: ''
+    points: 0
   }
 
   private readonly userApi = inject(UsersApi);
