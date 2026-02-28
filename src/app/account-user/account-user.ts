@@ -24,7 +24,7 @@ export class AccountUser implements OnInit {
   private readonly userApi = inject(UsersApi);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  private readonly cdr = inject(ChangeDetectorRef); 
+  private readonly cdr = inject(ChangeDetectorRef);
 
   userId: number = 0;
 
@@ -39,7 +39,10 @@ export class AccountUser implements OnInit {
           this.user = data;
           this.cdr.detectChanges(); 
         },
-        error: (err) => console.error(err)
+        error: (err) => {
+          console.error(err)
+          this.router.navigate(['/'])
+        }
       });
     }
   }
@@ -48,7 +51,7 @@ export class AccountUser implements OnInit {
     this.userApi.updateUser(this.userId, this.user).subscribe({
       next: () => {
         this.router.navigate(['/']);
-      },    
+      },
     });
   }
 }
