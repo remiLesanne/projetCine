@@ -35,7 +35,7 @@ export class Connexion {
       next: (user) => {
         console.log(user);
         this.toast.ok("Bienvenue sur votre espace " + user.firstName + " " + user.lastName, "Authentification")
-        this.router.navigate(['/']);
+        this.router.navigate(['/account/' + user.id]);
       },
       error: () => {
         this.toast.err("Erreur lors de la connexion", "Erreur");

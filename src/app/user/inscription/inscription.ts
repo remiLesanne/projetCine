@@ -34,9 +34,9 @@ export class Inscription {
       return;
     }
     this.usersApi.addUser(u).subscribe({
-      next: () => {
+      next: (user) => {
         this.toast.ok("Inscription finalisé avec succès !", "Inscription")
-        this.router.navigate(['/'])
+        this.router.navigate(['/account/' + user.id])
       },
       error: () => {
         this.toast.err("Erreur lors de la création de l'utilisateur", "Erreur")
