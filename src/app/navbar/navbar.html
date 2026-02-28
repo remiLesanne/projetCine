@@ -16,6 +16,9 @@
     <a class="nav-link ms-3" routerLink="/movies" routerLinkActive="active fw-semibold">
       Gestion de films
     </a>
+      <a class="nav-link ms-3" [routerLink]="['/account', currentUserId]" routerLinkActive="active fw-semibold">
+      Compte utilisateur
+    </a> 
     <a class="nav-link ms-3" routerLink="/admin" routerLinkActive="active fw-semibold">
       Zone du Boss aka Rémi
     </a>
