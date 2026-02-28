@@ -17,4 +17,16 @@ export class UsersApi {
   connexion(email: string): Observable<User> {
     return this.httpClient.get<User>(`${this.url}/byEmail/${email}`);
   }
+
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.url}/users`);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.url}/users/${id}`);
+  }
+
+  updateUser(id: number, user: User): Observable<User> {
+    return this.httpClient.put<User>(`${this.url}/users/${id}`, user);
+  }
 }
