@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-expand bg-light px-4 sticky-top shadow-sm">
+<nav [class.nav-hidden]="hidden"  class="navbar navbar-light navbar-expand bg-light px-4 sticky-top shadow-sm">
   <!-- Gauche : image + titre -->
   <a class="navbar-brand d-flex align-items-center gap-3 mb-0" routerLink="/">
     <img src="/remi/remi.png"
@@ -18,7 +18,7 @@
     </a>
       <a class="nav-link ms-3" [routerLink]="['/account', currentUserId]" routerLinkActive="active fw-semibold">
       Compte utilisateur
-    </a> 
+    </a>
     <a class="nav-link ms-3" routerLink="/admin" routerLinkActive="active fw-semibold">
       Zone du Boss aka Rémi
     </a>
