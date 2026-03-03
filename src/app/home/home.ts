@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Movie} from '../models/movie';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {MovieCard} from './movie-card/movie-card';
+import {Carousel} from '../carousel/carousel';
 
 @Component({
   selector: 'app-home',
