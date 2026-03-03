@@ -1,0 +1,208 @@
+// === Palette (reprise de la DA) ===
+$footer-bg: #deded5;
+$accent: #818963;
+$accent-dark: darken($accent, 12%);
+$text: #4f4f4f;
+$text-light: #6b6b6b;
+$bottom-bg: rgba(0, 0, 0, 0.15);
+
+// === Footer principal ===
+.site-footer {
+  background-color: $footer-bg;
+  position: relative;
+  font-size: 0.95rem;
+  color: $text;
+}
+
+// === Séparateur décoratif ===
+.footer-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to var(--dir, right),
+      transparent,
+      $accent 50%,
+      transparent
+    );
+  }
+
+  &::before {
+    --dir: right;
+  }
+
+  &::after {
+    --dir: left;
+  }
+
+  .separator-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: $footer-bg;
+    border: 1px solid rgba($accent, 0.4);
+    color: $accent;
+    font-size: 1.1rem;
+    margin: -22px 1rem 0;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// === Titres des sections ===
+.footer-title {
+  letter-spacing: 2px;
+  color: $accent;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 2px;
+    background-color: $accent;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+}
+
+// Hover sur la colonne → la barre s'étend
+.col-lg-4:hover .footer-title::after {
+  width: 60px;
+}
+
+// === Blague ===
+.footer-joke {
+  font-style: italic;
+  color: $text-light;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  border-left: 3px solid $accent;
+}
+
+// === Texte standard ===
+.footer-text {
+  color: $text;
+  margin-bottom: 0;
+}
+
+// === Liens ===
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: $text;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: inline-block;
+
+    .bi-chevron-right {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      color: $accent-dark;
+      padding-left: 4px;
+
+      .bi-chevron-right {
+        transform: translateX(3px);
+      }
+    }
+  }
+}
+
+// === Icônes réseaux sociaux ===
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  color: $accent;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 1px solid rgba($accent, 0.2);
+
+  &:hover {
+    background-color: $accent;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba($accent, 0.35);
+    border-color: $accent;
+  }
+}
+
+// === Barre du bas ===
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.5rem;
+  background-color: $bottom-bg;
+  font-size: 0.88rem;
+  color: $text;
+}
+
+.easter-egg {
+  color: $accent;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
+
+  &:hover {
+    color: $accent-dark;
+    letter-spacing: 1px;
+  }
+
+  .bi-lightning-charge-fill {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+}
+
+// === Animation ===
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
