@@ -1,8 +1,11 @@
-import { Component, input, inject } from '@angular/core';
+import { Component, input, inject, HostListener } from '@angular/core';
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
+import { UsersApi } from '../services/users-api';
+import { User } from '../models/user';
+
 
 @Component({
   selector: 'app-navbar',
@@ -24,5 +27,28 @@ export class Navbar {
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);
+  }
+
+  private readonly usersApi = inject(UsersApi);
+  currentUserId: number = 1;
+  users: User[] = []
+  hidden = false;
+  private lastScrollTop = 0;
+
+
+  ngOnInit(): void {
+    this.usersApi.getUsers().subscribe(users => this.users = users);
+  };
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const currentScroll = window.pageYOffset || 0;
+    const delta = currentScroll - this.lastScrollTop;
+
+    if (Math.abs(delta) < 10) return; // évite le tremblement
+
+    this.hidden = delta > 0;
+    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+
   }
 }
