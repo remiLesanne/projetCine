@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Movie } from '../models/movie';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MoviesApi } from '../services/movies-api';
+import { ToastService } from '../services/toast';
 
 /**
  * Composant AddMovie
@@ -28,6 +29,9 @@ export class AddMovie {
 
   // Injection du Router pour naviguer entre les pages après l'ajout du film
   private readonly router = inject(Router);
+
+  // Injection du ToastService pour afficher des notifications à l'utilisateur
+  private readonly toast = inject(ToastService);
 
   // Messages de feedback
   errorMessage: string = '';
@@ -62,7 +66,7 @@ export class AddMovie {
 
     // Vérifier si le formulaire existe et est valide
     if (!this.form) {
-      this.errorMessage = 'Erreur : formulaire non initialisé.';
+      this.toast.err('Le formulaire est introuvable. Veuillez réessayer.');
       return;
     }
 
@@ -73,7 +77,7 @@ export class AddMovie {
         this.form?.controls[key].markAsTouched();
       });
 
-      this.errorMessage = 'Veuillez corriger les erreurs dans le formulaire avant de continuer.';
+      this.toast.err('Veuillez corriger les erreurs dans le formulaire avant de continuer.');
 
       // Faire défiler vers le haut pour voir le message d'erreur
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -87,7 +91,7 @@ export class AddMovie {
     this.moviesApi.addMovie(this.movie).subscribe({
       // Callback de succès : quand le film est ajouté avec succès
       next: () => {
-        this.successMessage = 'Film ajouté avec succès !';
+        this.toast.ok('Film ajouté avec succès !');
         this.isSubmitting = false;
 
         // Redirection après un court délai pour afficher le message
@@ -97,7 +101,7 @@ export class AddMovie {
       },
       // Callback d'erreur : si l'ajout échoue
       error: (err) => {
-        this.errorMessage = 'Erreur lors de l\'ajout du film. Veuillez réessayer.';
+        this.toast.err('Erreur lors de l\'ajout du film. Veuillez réessayer.');
         this.isSubmitting = false;
         console.error('Erreur lors de l\'ajout du film:', err);
         window.scrollTo({ top: 0, behavior: 'smooth' });
