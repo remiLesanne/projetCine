@@ -29,4 +29,8 @@ export class UsersApi {
   updateUser(id: number, user: User): Observable<User> {
     return this.httpClient.put<User>(`${this.url}/${id}`, user);
   }
+
+  deleteUser(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
 }
