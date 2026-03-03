@@ -6,6 +6,7 @@ import {Movie} from '../models/movie';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {MovieCard} from './movie-card/movie-card';
 import {Carousel} from '../carousel/carousel';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import {Carousel} from '../carousel/carousel';
     AsyncPipe,
     DatePipe,
     MovieCard,
-    Carousel
+    Carousel,
+    RouterLink
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

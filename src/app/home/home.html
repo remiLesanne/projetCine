@@ -5,10 +5,21 @@
   }
 </div>
 
-<!-- Section des cartes de films -->
-<div class="movies-grid">
-  @for (movie of movies$ | async; track movie.id) {
-    <app-movie-card [movie]="movie">
-    </app-movie-card>
-  }
-</div>
+<!-- Section de bienvenue -->
+<section class="welcome-section">
+  <div class="welcome-content">
+    <h1 class="welcome-title">Bienvenue sur Punch Cinéma</h1>
+    <p class="welcome-text">
+      Découvrez notre collection de films nuls, soigneusement sélectionnés pour vous offrir les
+      pires expériences cinématographiques de votre vie. Des classiques intemporels aux dernières
+      sorties ratées, explorez notre catalogue et laissez-vous emporter par la magie inexistante du cinéma.
+    </p>
+    <div class="welcome-cta">
+      <a routerLink="/nos-films" class="btn btn-primary btn-lg">
+        <i class="bi bi-film me-2"></i>
+        Découvrir nos films
+      </a>
+    </div>
+  </div>
+</section>
+

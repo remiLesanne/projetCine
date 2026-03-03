@@ -8,9 +8,11 @@ import { Inscription } from './user/inscription/inscription';
 import { Connexion } from './user/connexion/connexion';
 import {AccountUser} from './account-user/account-user';
 import { PanelAdmin } from './panel-admin/panel-admin';
+import {HomePrincpipal} from './home-princpipal/home-princpipal';
 
 export const routes: Routes = [
-  { path: '', component: Home},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: Home},
   { path: 'movies', component: MoviesList},
   { path: 'admin', component: Admin},
   { path: 'AddMovie', component: AddMovie},
@@ -18,5 +20,6 @@ export const routes: Routes = [
   { path: 'inscription', component: Inscription},
   { path: 'connexion', component: Connexion},
   { path: 'account/:id', component: AccountUser},
-  { path: 'panel-admin', component: PanelAdmin}
+  { path: 'panel-admin', component: PanelAdmin},
+  { path: 'nos-films', component : HomePrincpipal}
 ];
