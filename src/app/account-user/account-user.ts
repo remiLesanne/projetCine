@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { UsersApi } from '../services/users-api';
 import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-account-user',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, UpperCasePipe],
   templateUrl: './account-user.html',
   styleUrl: './account-user.scss',
 })
@@ -37,7 +38,7 @@ export class AccountUser implements OnInit {
       this.userApi.getUserById(this.userId).subscribe({
         next: (data) => {
           this.user = data;
-          this.cdr.detectChanges(); 
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error(err)
