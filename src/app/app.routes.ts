@@ -7,6 +7,7 @@ import {EditMovie} from './edit-movie/edit-movie';
 import { Inscription } from './user/inscription/inscription';
 import { Connexion } from './user/connexion/connexion';
 import {AccountUser} from './account-user/account-user';
+import { PanelAdmin } from './panel-admin/panel-admin';
 
 export const routes: Routes = [
   { path: '', component: Home},
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'edit-movie/:id', component: EditMovie},
   { path: 'inscription', component: Inscription},
   { path: 'connexion', component: Connexion},
-  { path: 'account/:id', component: AccountUser}
+  { path: 'account/:id', component: AccountUser},
+  { path: 'panel-admin', component: PanelAdmin}
 ];
