@@ -1,105 +1,85 @@
-<!-- account-user.html -->
-<div>
+<div class="account-container">
+  @if (user.id) {
+  <div class="account-card">
 
-  <!-- Header -->
-  <div>
-    <div>
-      <div>
-        <div>
-          <div>
-            <span>
-              {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
-            </span>
-          </div>
-
-          <div>
-            <p>Membre</p>
-            <h1>{{ user.firstName }} {{ user.lastName }}</h1>
-            <p>{{ user.email }}</p>
-          </div>
-
-          <div>
-            <div>
-              <span>{{ user.points }}</span>
-              <span>pts</span>
-            </div>
-          </div>
+    <!-- Header -->
+    <div class="account-header">
+      <div class="account-header-left">
+        <div class="avatar">
+          {{ user.firstName?.charAt(0) | uppercase }}{{ user.lastName?.charAt(0) | uppercase }}
+        </div>
+        <div class="user-identity">
+          <span class="role">Membre</span>
+          <h1 class="name">{{ user.firstName }} {{ user.lastName }}</h1>
+          <span class="email">{{ user.email }}</span>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Form Section -->
-  <div>
-    <div>
-      <div>
-
-        <div>
-          <div>
-            <h5>Informations personnelles</h5>
-          </div>
-
-          <div>
-            <form>
-              
-              <div>
-                <label>Prénom</label>
-                <input type="text"
-                       [(ngModel)]="user.firstName"
-                       name="firstName"
-                       placeholder="Votre prénom">
-              </div>
-
-              <div>
-                <label>Nom</label>
-                <input type="text"
-                       [(ngModel)]="user.lastName"
-                       name="lastName"
-                       placeholder="Votre nom">
-              </div>
-
-              <div>
-                <label>Âge</label>
-                <input type="number"
-                       [(ngModel)]="user.age"
-                       name="age"
-                       placeholder="Votre âge">
-              </div>
-
-              <div>
-                <label>Email</label>
-                <input type="email"
-                       [(ngModel)]="user.email"
-                       name="email"
-                       placeholder="votre@email.com">
-              </div>
-
-              <div>
-                <label>Points fidélité</label>
-                <input type="text"
-                       [(ngModel)]="user.points"
-                       name="points"
-                       placeholder="0"
-                       readonly>
-              </div>
-
-              <div>
-                <button type="button" (click)="updateUser()">
-                  Sauvegarder
-                </button>
-
-                <a routerLink="/movies">
-                  Annuler
-                </a>
-              </div>
-
-            </form>
-          </div>
-
+      <div class="account-header-right">
+        <div class="points-value">
+          {{ user.points }}<small>pts</small>
         </div>
-
+        <div class="points-label">Fidélité</div>
       </div>
     </div>
-  </div>
 
+    <!-- Body / Form -->
+    <div class="account-body">
+      <h5 class="account-body__title">
+        <i class="bi bi-person-lines-fill"></i>
+        Informations personnelles
+      </h5>
+
+      <form class="settings-list">
+
+        <div class="settings-row">
+          <span class="settings-label">Prénom</span>
+          <div class="settings-control">
+            <input type="text" class="clean-input" [(ngModel)]="user.firstName" name="firstName"
+              placeholder="Votre prénom">
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <span class="settings-label">Nom</span>
+          <div class="settings-control">
+            <input type="text" class="clean-input" [(ngModel)]="user.lastName" name="lastName" placeholder="Votre nom">
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <span class="settings-label">Email</span>
+          <div class="settings-control">
+            <input type="email" class="clean-input" [(ngModel)]="user.email" name="email" placeholder="votre@email.com">
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <span class="settings-label">Âge</span>
+          <div class="settings-control">
+            <input type="number" class="clean-input" [(ngModel)]="user.age" name="age" placeholder="Votre âge">
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <span class="settings-label">Points fidélité</span>
+          <div class="settings-control">
+            <input type="text" class="clean-input" [(ngModel)]="user.points" name="points" readonly>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a routerLink="/movies" class="btn btn--secondary">
+            Annuler
+          </a>
+          <button type="button" class="btn btn--primary" (click)="updateUser()">
+            <i class="bi bi-save"></i>
+            Sauvegarder
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  }
 </div>
