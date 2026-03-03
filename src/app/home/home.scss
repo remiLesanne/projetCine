@@ -1,5 +1,19 @@
 :host {
+  display: block;
+  width: 100%;
+}
+
+// Container du carousel - pleine largeur
+.carousel-container {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+// Grille des cartes de films
+.movies-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
 }

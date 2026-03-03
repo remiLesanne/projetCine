@@ -1,5 +1,14 @@
-@for (movie of movies$ | async; track movie.id) {
-  <app-movie-card [movie]="movie">
-  </app-movie-card>
+<!-- Carousel avec tous les films (pleine largeur) -->
+<div class="carousel-container">
+  @if (movies$ | async; as movies) {
+    <app-carousel [movies]="movies"></app-carousel>
+  }
+</div>
 
-}
+<!-- Section des cartes de films -->
+<div class="movies-grid">
+  @for (movie of movies$ | async; track movie.id) {
+    <app-movie-card [movie]="movie">
+    </app-movie-card>
+  }
+</div>

@@ -3,14 +3,16 @@ import {inject} from '@angular/core';
 import {MoviesApi} from '../services/movies-api';
 import {Observable} from 'rxjs';
 import {Movie} from '../models/movie';
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, DatePipe} from '@angular/common';
 import {MovieCard} from './movie-card/movie-card';
 
 @Component({
   selector: 'app-home',
   imports: [
     AsyncPipe,
-    MovieCard
+    DatePipe,
+    MovieCard,
+    Carousel
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
