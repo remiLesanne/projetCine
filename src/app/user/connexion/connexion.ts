@@ -1,10 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
-import { User } from '../../models/user';
+import { Component, inject } from '@angular/core';
 import { UsersApi } from '../../services/users-api';
 import { Router } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast';
-import { isEmpty } from 'rxjs';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-connexion',
@@ -16,6 +15,7 @@ export class Connexion {
   private readonly usersApi = inject(UsersApi);
   private readonly router = inject(Router);
   private readonly toast = inject(ToastService);
+  private readonly auth = inject(AuthService);
 
   emailUser = '';
   password = '';
@@ -34,6 +34,7 @@ export class Connexion {
     this.usersApi.connexion(this.emailUser).subscribe({
       next: (user) => {
         console.log(user);
+        this.auth.login(user);
         this.toast.ok("Bienvenue sur votre espace " + user.firstName + " " + user.lastName, "Authentification")
         this.router.navigate(['/account/' + user.id]);
       },

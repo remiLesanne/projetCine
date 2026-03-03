@@ -1,13 +1,8 @@
-import {Component, input} from '@angular/core';
-import {TitleCasePipe} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import { AccountUser } from '../account-user/account-user';
-import { User } from '../models/user';
-import { UsersApi } from '../services/users-api';
-import { inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { OnInit } from '@angular/core';
-
+import { Component, input, inject } from '@angular/core';
+import { TitleCasePipe, CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -22,11 +17,12 @@ import { OnInit } from '@angular/core';
 
 export class Navbar {
   title = input.required<string>();
-  private readonly usersApi = inject(UsersApi);
-  currentUserId: number = 1;
-  users: User[] = []
-  ngOnInit(): void {
-    this.usersApi.getUsers().subscribe(users => this.users = users);
-    };
-  //@Input({ required: true }) title! : string
+
+  private readonly router = inject(Router);
+  readonly auth = inject(AuthService);
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
 }
