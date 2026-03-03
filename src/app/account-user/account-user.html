@@ -30,42 +30,32 @@
         Informations personnelles
       </h5>
 
-      <form class="settings-list">
+      <form class="form-grid">
 
-        <div class="settings-row">
-          <span class="settings-label">Prénom</span>
-          <div class="settings-control">
-            <input type="text" class="clean-input" [(ngModel)]="user.firstName" name="firstName"
-              placeholder="Votre prénom">
-          </div>
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName"
+            placeholder="Votre prénom">
         </div>
 
-        <div class="settings-row">
-          <span class="settings-label">Nom</span>
-          <div class="settings-control">
-            <input type="text" class="clean-input" [(ngModel)]="user.lastName" name="lastName" placeholder="Votre nom">
-          </div>
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName" placeholder="Votre nom">
         </div>
 
-        <div class="settings-row">
-          <span class="settings-label">Email</span>
-          <div class="settings-control">
-            <input type="email" class="clean-input" [(ngModel)]="user.email" name="email" placeholder="votre@email.com">
-          </div>
+        <div class="form-group form-group--full">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="votre@email.com">
         </div>
 
-        <div class="settings-row">
-          <span class="settings-label">Âge</span>
-          <div class="settings-control">
-            <input type="number" class="clean-input" [(ngModel)]="user.age" name="age" placeholder="Votre âge">
-          </div>
+        <div class="form-group">
+          <label class="form-label">Âge</label>
+          <input type="number" class="form-control" [(ngModel)]="user.age" name="age" placeholder="Votre âge">
         </div>
 
-        <div class="settings-row">
-          <span class="settings-label">Points fidélité</span>
-          <div class="settings-control">
-            <input type="text" class="clean-input" [(ngModel)]="user.points" name="points" readonly>
-          </div>
+        <div class="form-group">
+          <label class="form-label">Points fidélité</label>
+          <input type="text" class="form-control" [(ngModel)]="user.points" name="points" readonly>
         </div>
 
         <div class="form-actions">
