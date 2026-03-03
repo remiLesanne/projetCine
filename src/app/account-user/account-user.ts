@@ -5,6 +5,7 @@ import { UsersApi } from '../services/users-api';
 import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
+import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-account-user',
@@ -26,6 +27,7 @@ export class AccountUser implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly toast = inject(ToastService);
 
   userId: number = 0;
 
@@ -42,6 +44,7 @@ export class AccountUser implements OnInit {
         },
         error: (err) => {
           console.error(err)
+          this.toast.err('Erreur lors de la modification du compte')
           this.router.navigate(['/'])
         }
       });
@@ -52,6 +55,7 @@ export class AccountUser implements OnInit {
     this.userApi.updateUser(this.userId, this.user).subscribe({
       next: () => {
         this.router.navigate(['/']);
+        this.toast.ok('Modification enregistrée avec succès')
       },
     });
   }

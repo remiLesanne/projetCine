@@ -3,6 +3,7 @@ import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { FormsModule } from '@angular/forms';
 import { MoviesApi } from '../services/movies-api';
+import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-edit-movie',
@@ -18,6 +19,7 @@ export class EditMovie implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly toast = inject(ToastService);
 
   movieId: number = 0;
   movie: Movie = {
@@ -53,7 +55,7 @@ export class EditMovie implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors du chargement du film:', error);
-        alert('Erreur lors du chargement du film');
+        this.toast.err('Erreur lors du chargement du film');
         this.router.navigate(['/movies']);
       }
     });
@@ -66,12 +68,12 @@ export class EditMovie implements OnInit {
   updateMovie(): void {
     this.moviesApi.updateMovie(this.movieId, this.movie).subscribe({
       next: () => {
-        alert('Film modifié avec succès!');
+        this.toast.ok('Film modifié avec succès')
         this.router.navigate(['/movies']);
       },
       error: (error) => {
         console.error('Erreur lors de la modification:', error);
-        alert('Erreur lors de la modification du film');
+        this.toast.err('Erreur lors de la modification:');
       }
     });
   }
