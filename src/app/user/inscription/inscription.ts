@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { User } from '../../models/user';
 import { UsersApi } from '../../services/users-api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast';
 import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-inscription',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './inscription.html',
   styleUrl: './inscription.scss',
 })

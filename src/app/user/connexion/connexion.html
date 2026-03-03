@@ -1,39 +1,52 @@
-<h1>Connexion</h1>
+<div class="account-container">
+  <div class="account-card">
 
-<div class="d-flex flex-column w-50 gap-3">
-
-
-    <!-- Email -->
-    <div class="d-flex flex-column">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        class="form-control"
-        placeholder="prenom.nom@allocine.com"
-        [(ngModel)]="emailUser"
-        #emailCtrl="ngModel" />
+    <!-- Header -->
+    <div class="account-header">
+      <div class="account-header-left">
+        <div class="avatar">
+          <i class="bi bi-box-arrow-in-right"></i>
+        </div>
+        <div class="user-identity">
+          <span class="role">Espace personnel</span>
+          <h1 class="name">Connexion</h1>
+          <span class="email">Accédez à votre compte CinéApp</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Mot de passe -->
-    <div class="d-flex flex-column">
-      <label for="password">Mot de passe</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        class="form-control"
-        [(ngModel)]="password"
-        #passwordCtrl="ngModel" />
+    <!-- Body / Form -->
+    <div class="account-body">
+      <h5 class="account-body__title">
+        <i class="bi bi-shield-lock-fill"></i>
+        Vos identifiants
+      </h5>
+
+      <form class="form-grid">
+
+        <div class="form-group form-group--full">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" [(ngModel)]="emailUser" name="email"
+            placeholder="prenom.nom@allocine.com">
+        </div>
+
+        <div class="form-group form-group--full">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" [(ngModel)]="password" name="password"
+            placeholder="••••••••">
+        </div>
+
+        <div class="form-actions">
+          <a routerLink="/inscription" class="btn btn--secondary">
+            Pas encore inscrit ?
+          </a>
+          <button type="button" class="btn btn--primary" (click)="connexion()">
+            <i class="bi bi-box-arrow-in-right"></i>
+            Se connecter
+          </button>
+        </div>
+      </form>
     </div>
 
-    <button
-      type="submit"
-      (click)="connexion()"
-      class="btn btn-primary">
-      Se connecter
-    </button>
-
-
+  </div>
 </div>

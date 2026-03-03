@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { UsersApi } from '../../services/users-api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast';
 import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-connexion',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './connexion.html',
   styleUrl: './connexion.scss',
 })

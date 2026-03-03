@@ -1,0 +1,270 @@
+// ─── Design Tokens ────────────────────────────────────────
+$white: #ffffff;
+$bg-page: #f4f6f9;
+$card-border: #e2e6ed;
+$header-from: #4f46e5;
+$header-to: #6366f1;
+$text-dark: #1e293b;
+$text-body: #475569;
+$text-muted: #94a3b8;
+$radius-lg: 12px;
+$radius-sm: 6px;
+$shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+$transition: 0.2s ease;
+
+// ─── Host ───────────────────────────────────────────────────
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem 1.5rem;
+  background: $bg-page;
+  min-height: calc(100vh - 70px);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+// ─── Main Container ───────────────────────────────────────
+.account-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+// ─── Card ─────────────────────────────────────────────────
+.account-card {
+  background: $white;
+  border: 1px solid $card-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+// ─── Header ─────────────────────────────────────────────────
+.account-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, $header-from, $header-to);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ─── Avatar ─────────────────────────────────────────────────
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $header-from;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+// ─── Header Typography ──────────────────────────────────────
+.user-identity {
+  display: flex;
+  flex-direction: column;
+
+  .role {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 0.2rem;
+  }
+
+  .name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .email {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: 0.2rem;
+  }
+}
+
+// ─── Body ───────────────────────────────────────────────────
+.account-body {
+  padding: 2.5rem;
+  background: $white;
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      color: $header-from;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// ─── Form Controls ──────────────────────────────────────────
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $text-muted;
+  margin-bottom: 0;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: $text-dark;
+  background: #f8fafc;
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  transition: all $transition;
+
+  &::placeholder {
+    color: #cbd5e1;
+    font-weight: 400;
+  }
+
+  &:focus {
+    outline: none;
+    background: #fff;
+    border-color: $header-from;
+    box-shadow: 0 0 0 3px rgba($header-from, 0.1);
+  }
+}
+
+// ─── Form Actions ───────────────────────────────────────────
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $card-border;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: 1rem;
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, $header-from, $header-to);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba($header-from, 0.2);
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba($header-from, 0.3);
+      color: #fff;
+    }
+  }
+
+  &--secondary {
+    background: $bg-page;
+    color: $text-body;
+
+    &:hover {
+      background: darken($bg-page, 4%);
+      color: $text-dark;
+    }
+  }
+}
+
+// ─── Responsive ─────────────────────────────────────────────
+@media (max-width: 600px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .account-header {
+    padding: 1.5rem;
+  }
+
+  .account-body {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
