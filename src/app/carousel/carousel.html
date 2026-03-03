@@ -1,0 +1,27 @@
+<!-- Carousel horizontal avec défilement automatique -->
+<div class="carousel-wrapper">
+  <div class="carousel-track">
+    <!-- On duplique 3 fois la liste pour créer l'effet infini -->
+    @for (movie of displayedMovies; track movie.id + '-' + $index) {
+      <div class="movie-card-small">
+        <div class="card-image-container">
+          <img
+            [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
+            [alt]="movie.title"
+            class="card-image">
+          <div class="card-overlay">
+            <div class="card-content">
+              <h3 class="card-title">{{ movie.title }}</h3>
+              <p class="card-info">{{ movie.director }}</p>
+              @if (movie.rate) {
+                <div class="card-rating">
+                  <i class="bi bi-star-fill"></i> {{ movie.rate }}/5
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
