@@ -8,3 +8,53 @@ nav {
 .nav-hidden {
   transform: translateY(-100%);
 }
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+.navbar-collapse {
+  @media (max-width: 991.98px) {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    &.show {
+      max-height: 500px;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      padding-top: 1rem;
+    }
+  }
+}
+
+.navbar-nav {
+  @media (max-width: 991.98px) {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.5rem;
+
+    .nav-link {
+      padding: 0.5rem 0;
+      
+      &.ms-lg-3 {
+        margin-left: 0 !important;
+      }
+
+      &.ms-lg-2 {
+        margin-left: 0 !important;
+      }
+    }
+
+    > button {
+      margin-top: 0.5rem;
+      margin-left: 0 !important;
+      width: 100%;
+    }
+  }
+}

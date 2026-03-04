@@ -23,10 +23,20 @@ export class Navbar {
 
   private readonly router = inject(Router);
   readonly auth = inject(AuthService);
+  isMenuOpen = false;
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+  }
 
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);
+    this.closeMenu();
   }
 
   private readonly usersApi = inject(UsersApi);
