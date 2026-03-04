@@ -27,6 +27,31 @@ Ce projet est une application web moderne développée avec **Angular 21**, perm
 - **Services API centralisés** : Communication optimisée avec le backend pour les films et les utilisateurs.
 - **Routage Dynamique** : Navigation fluide entre les différentes sections de l'application.
 
+## 🐳 Dockerisation & Nginx
+
+Le projet est entièrement "Dockerisé" pour faciliter le déploiement et garantir un environnement d'exécution identique partout.
+
+### 🏗️ Stratégie de Build (Multi-stage)
+L'application utilise un **Dockerfile multi-stage** :
+1.  **Étape de Build** : Utilise une image `Node.js` pour installer les dépendances et compiler l'application Angular en mode production.
+2.  **Étape de Production** : Utilise une image légère `Nginx Alpine`. Seuls les fichiers compilés (le dossier `dist/`) sont copiés dans cette image, ce qui permet d'avoir un conteneur final très léger et sécurisé.
+
+### 🌐 Serveur Nginx
+Comme il s'agit d'une **SPA (Single Page Application)**, un serveur web est nécessaire pour servir les fichiers statiques.
+- **Configuration sur mesure** : Le fichier `nginx.conf` est utilisé pour rediriger toutes les requêtes vers `index.html`. Cela permet au routeur d'Angular de gérer lui-même la navigation sans erreur 404 lors du rafraîchissement d'une page.
+- **Performance** : Nginx est extrêmement performant pour servir du contenu statique (HTML, CSS, JS).
+
+### 🚀 Lancer avec Docker
+Pour démarrer l'application via Docker :
+```bash
+# Build de l'image
+docker build -t projet-cine-front .
+
+# Lancement du conteneur
+docker run -p 8080:80 projet-cine-front
+```
+L'application sera alors accessible sur `http://localhost:8080`.
+
 ## 🛠️ Stack Technique
 
 - **Framework** : [Angular 21](https://angular.dev/)
