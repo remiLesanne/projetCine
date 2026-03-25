@@ -2,8 +2,6 @@
 
 Ce projet est une application web moderne développée avec **Angular 21**, permettant de consulter, gérer et administrer une bibliothèque de films. Il propose une interface utilisateur riche basée sur **PrimeNG** et **Bootstrap**.
 
-Le site est disponible en ligne suivant ce lien : [Punch Cinema](https://punchcinema.miloplus.fr/)
-
 ## 🚀 Fonctionnalités Principales
 
 ### 🍿 Exploration des Films
